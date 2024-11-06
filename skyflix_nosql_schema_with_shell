@@ -12,12 +12,12 @@ db.users.drop()
 db.users.insertMany([
   {
     _id: ObjectId(),
-    username: "john_doe",
-    email: "john@example.com",
+    username: "fahryan",
+    email: "fahryan@gmail.com",
     password: "hashed_password",
-    fullName: "John Doe",
+    fullName: "Fahryan Akbar Rizqy Santoso",
     dateOfBirth: ISODate("1990-05-15"),
-    country: "USA",
+    country: "ID",
     createdAt: ISODate("2024-10-15T12:47:31Z"),
     preferences: [
       {
@@ -39,12 +39,12 @@ db.users.insertMany([
   },
   {
     _id: ObjectId(),
-    username: "jane_smith",
-    email: "jane@example.com",
+    username: "hanfik",
+    email: "hanfik@gmail.com",
     password: "hashed_password",
-    fullName: "Jane Smith",
+    fullName: "Rayhan Syaputra Fikri",
     dateOfBirth: ISODate("1988-09-22"),
-    country: "UK",
+    country: "ID",
     createdAt: ISODate("2024-10-15T12:47:31Z"),
     preferences: [
       {
