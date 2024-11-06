@@ -4,16 +4,16 @@
 
 1. [Users Collection](#users-collection)
 2. [Actors Collection](#actors-collection)
-2. [Studios Collection](#studios-collection)
-2. [Directors Collection](#directors-collection)
-2. [Genres Collection](#genres-collection)
-2. [Films Collection](#films-collection)
-2. [Reviews Collection](#reviews-collection)
-2. [watchHistory Collection](#watchHistory-collection)
-2. [Watchlist Collection](#watchlist-collection)
-2. [Analitycs Collection](#analytics-collection)
-2. [userRecommendations Collection](#userRecommendations-collection)
-2. [watchHistory_archive Collection](#watchHistory_archive-collection)
+3. [Studios Collection](#studios-collection)
+4. [Directors Collection](#directors-collection)
+5. [Genres Collection](#genres-collection)
+6. [Films Collection](#films-collection)
+7. [Reviews Collection](#reviews-collection)
+8. [watchHistory Collection](#watchHistory-collection)
+9. [Watchlist Collection](#watchlist-collection)
+10. [Analitycs Collection](#analytics-collection)
+11. [userRecommendations Collection](#userRecommendations-collection)
+12. [watchHistory_archive Collection](#watchHistory_archive-collection)
 
 ## 1. Users Collection:
 ```javascript
@@ -76,26 +76,30 @@ db.users.insertMany([
 ```
 Collection ini menyimpan data pengguna dengan struktur berikut:
 
-- `_id`: ID unik MongoDB untuk setiap dokumen pengguna
-- `username`: Nama pengguna untuk login (unique)
-- `email`: Alamat email pengguna (unique)
-- `password`: Password yang di-hash untuk keamanan
-- `fullName`: Nama lengkap pengguna
-- `dateOfBirth`: Tanggal lahir pengguna (format ISODate)
-- `country`: Kode negara pengguna
-- `createdAt`: Timestamp pembuatan akun
-- `preferences`: Array yang berisi preferensi pengguna
-  - `genreId`: ID genre yang disukai
-  - `actorId`: ID aktor yang disukai
-  - `preferenceScore`: Skor preferensi (0-1)
-- `paymentInfo`: Object berisi informasi pembayaran
-  - `cardType`: Jenis kartu (VISA/MasterCard)
-  - `cardNumber`: Nomor kartu
-  - `expirationDate`: Tanggal kadaluarsa kartu
-- `subscription`: Object berisi info langganan
-  - `status`: Status langganan (active/inactive)
-  - `startDate`: Tanggal mulai langganan
-  - `endDate`: Tanggal berakhir langganan
+- `_id`: ID unik MongoDB untuk setiap dokumen pengguna.
+- `username`: Nama pengguna untuk login (unique).
+- `email`: Alamat email pengguna (unique).
+- `password`: Password yang di-hash untuk keamanan.
+- `fullName`: Nama lengkap pengguna.
+- `dateOfBirth`: Tanggal lahir pengguna (format ISODate).
+- `country`: Kode negara pengguna.
+- `createdAt`: Timestamp pembuatan akun.
+- `preferences`: Array yang berisi preferensi pengguna.
+  - `genreId`: ID genre yang disukai.
+  - `actorId`: ID aktor yang disukai.
+  - `preferenceScore`: Skor preferensi (0-1).
+- `paymentInfo`: Object berisi informasi pembayaran.
+  - `cardType`: Jenis kartu (VISA/MasterCard).
+  - `cardNumber`: Nomor kartu.
+  - `expirationDate`: Tanggal kadaluarsa kartu.
+- `subscription`: Object berisi info langganan.
+  - `status`: Status langganan (active/inactive).
+  - `startDate`: Tanggal mulai langganan.
+  - `endDate`: Tanggal berakhir langganan.
+
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/Znj8gZQ3/Screenshot-1723.png)
 
 ## 2. Actors Collection:
 ```javascript
@@ -149,16 +153,20 @@ db.actors.insertMany([
 ```
 Collection ini menyimpan data aktor dengan struktur:
 
-- `_id`: ID unik MongoDB untuk setiap aktor
-- `firstName`: Nama depan aktor
-- `lastName`: Nama belakang aktor
-- `dateOfBirth`: Tanggal lahir aktor
-- `nationality`: Kewarganegaraan aktor
-- `biography`: Biografi singkat aktor
-- `email`: Email aktor (opsional)
-- `awards`: Array berisi penghargaan yang diterima
-  - `awardName`: Nama penghargaan
-  - `awardYear`: Tahun menerima penghargaan
+- `_id`: ID unik MongoDB untuk setiap aktor.
+- `firstName`: Nama depan aktor.
+- `lastName`: Nama belakang aktor.
+- `dateOfBirth`: Tanggal lahir aktor.
+- `nationality`: Kewarganegaraan aktor.
+- `biography`: Biografi singkat aktor.
+- `email`: Email aktor (opsional).
+- `awards`: Array berisi penghargaan yang diterima.
+  - `awardName`: Nama penghargaan.
+  - `awardYear`: Tahun menerima penghargaan.
+
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/bYR9dHvJ/Screenshot-1724.png)
 
 ## 3. Studios Collection:
 ```javascript
@@ -203,15 +211,19 @@ db.studios.insertMany([
 ```
 Collection ini menyimpan data studio produksi dengan struktur:
 
-- `_id`: ID unik MongoDB untuk setiap studio
-- `studioName`: Nama studio
-- `country`: Negara asal studio
-- `foundationYear`: Tahun pendirian studio
-- `active`: Status keaktifan studio (boolean)
-- `headquarters`: Object berisi lokasi kantor pusat
-  - `city`: Kota
-  - `state`: Negara bagian/provinsi
-  - `country`: Negara
+- `_id`: ID unik MongoDB untuk setiap studio.
+- `studioName`: Nama studio.
+- `country`: Negara asal studio.
+- `foundationYear`: Tahun pendirian studio.
+- `active`: Status keaktifan studio (boolean).
+- `headquarters`: Object berisi lokasi kantor pusat.
+  - `city`: Kota.
+  - `state`: Negara bagian/provinsi.
+  - `country`: Negara.
+
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/KvvrTkK5/Screenshot-1725.png)
 
 Setiap collection juga memiliki index untuk optimasi query:
 ```javascript
@@ -220,6 +232,10 @@ let ghibliId = db.studios.findOne({ studioName: "Studio Ghibli" })._id;
 let marvelId = db.studios.findOne({ studioName: "Marvel Studios" })._id;
 ```
 Index ini memastikan username bersifat unik dan mempercepat pencarian berdasarkan username.
+
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/X7HKkjd6/Screenshot-1726.png)
 
 ## 4. Directors Collection:
 ```javascript
@@ -261,39 +277,40 @@ db.directors.insertMany([
 ```
 Collection ini menyimpan data sutradara dengan struktur:
 
-- `_id`: ID unik MongoDB untuk setiap sutradara
-- `directorName`: Nama lengkap sutradara
-- `nationality`: Kewarganegaraan sutradara
-- `birthDate`: Tanggal lahir (format ISODate)
-- `specialization`: Array berisi genre/bidang spesialisasi
-- `activeYears`: Object berisi periode aktif
-  - `start`: Tahun mulai berkarir
-  - `end`: Tahun berhenti (null jika masih aktif)
+- `_id`: ID unik MongoDB untuk setiap sutradara.
+- `directorName`: Nama lengkap sutradara.
+- `nationality`: Kewarganegaraan sutradara.
+- `birthDate`: Tanggal lahir (format ISODate).
+- `specialization`: Array berisi genre/bidang spesialisasi.
+- `activeYears`: Object berisi periode aktif.
+  - `start`: Tahun mulai berkarir.
+  - `end`: Tahun berhenti (null jika masih aktif).
+
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/BnRxRmmh/Screenshot-1727.png)
 
 ```javascript
 let lasseterId = db.directors.findOne({ directorName: "John Lasseter" })._id;
 let miyazakiId = db.directors.findOne({ directorName: "Hayao Miyazaki" })._id;
 let favreauId = db.directors.findOne({ directorName: "Jon Favreau" })._id;
 ```
-Kode tersebut memiliki fungsi penting untuk menyimpan ID referensi dari para sutradara. Mari saya jelaskan secara detail:
+Kode tersebut memiliki fungsi penting untuk menyimpan ID referensi dari para sutradara.
 
-```javascript
-// Store director IDs for reference
-let lasseterId = db.directors.findOne({ directorName: "John Lasseter" })._id;
-let miyazakiId = db.directors.findOne({ directorName: "Hayao Miyazaki" })._id;
-let favreauId = db.directors.findOne({ directorName: "Jon Favreau" })._id;
-```
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/g0Rvp35G/Screenshot-1728.png)
 
 Fungsi utamanya:
 
 1. **Menyimpan Reference ID:**
-   - Kode ini mengambil ObjectID dari setiap sutradara dan menyimpannya dalam variabel
-   - ObjectID ini akan digunakan sebagai referensi di collection lain (terutama Films collection)
+   - Kode ini mengambil ObjectID dari setiap sutradara dan menyimpannya dalam variabel.
+   - ObjectID ini akan digunakan sebagai referensi di collection lain (terutama Films collection).
 
 2. **Metode yang Digunakan:**
-   - `db.directors.findOne()`: Mencari satu dokumen dalam collection directors
-   - `{ directorName: "..." }`: Query filter untuk mencari berdasarkan nama sutradara
-   - `._id`: Mengakses field _id dari dokumen yang ditemukan
+   - `db.directors.findOne()`: Mencari satu dokumen dalam collection directors.
+   - `{ directorName: "..." }`: Query filter untuk mencari berdasarkan nama sutradara.
+   - `._id`: Mengakses field _id dari dokumen yang ditemukan.
 
 3. **Kegunaan Praktis:**
    ```javascript
@@ -309,10 +326,10 @@ Fungsi utamanya:
    ```
 
 4. **Manfaat:**
-   - **Referential Integrity**: Memastikan integritas referensi antar collection
-   - **Query Efficiency**: Memudahkan join atau lookup antar collection
-   - **Data Consistency**: Menghindari kesalahan penulisan ID secara manual
-   - **Maintenance**: Memudahkan pembaruan data terkait di masa depan
+   - **Referential Integrity**: Memastikan integritas referensi antar collection.
+   - **Query Efficiency**: Memudahkan join atau lookup antar collection.
+   - **Data Consistency**: Menghindari kesalahan penulisan ID secara manual.
+   - **Maintenance**: Memudahkan pembaruan data terkait di masa depan.
 
 5. **Contoh Use Case:**
    ```javascript
@@ -321,11 +338,6 @@ Fungsi utamanya:
      "directors.directorId": lasseterId
    })
    ```
-
-6. **Best Practice:**
-   - Menyimpan ID dalam variabel menghindari pengulangan query
-   - Memudahkan debugging jika ada masalah dengan referensi
-   - Meningkatkan readability kode
 
 Jadi, kode ini juga bagian penting dari sistem referensi database yang memungkinkan relasi antar collection berjalan dengan efisien dan konsisten.
 
@@ -399,38 +411,39 @@ db.genres.insertMany([
 ```
 Collection ini menyimpan kategori/genre film dengan struktur kompleks:
 
-- `_id`: ID unik MongoDB untuk setiap genre
-- `genreName`: Nama genre (Animation, Sci-Fi, dll)
-- `description`: Deskripsi genre
-- `popularityRank`: Peringkat popularitas
-- `ageGroup`: Target kelompok usia
-- `moods`: Array berisi mood/suasana yang terkait
-  - `moodId`: ID unik untuk mood
-  - `moodName`: Nama mood (Happy, Excited, dll)
-  - `intensity`: Intensitas mood (0-1)
-- `targetAudience`: Array target penonton
-- `commonThemes`: Array tema umum dalam genre
+- `_id`: ID unik MongoDB untuk setiap genre.
+- `genreName`: Nama genre (Animation, Sci-Fi, dll).
+- `description`: Deskripsi genre.
+- `popularityRank`: Peringkat popularitas.
+- `ageGroup`: Target kelompok usia.
+- `moods`: Array berisi mood/suasana yang terkait.
+  - `moodId`: ID unik untuk mood.
+  - `moodName`: Nama mood (Happy, Excited, dll).
+  - `intensity`: Intensitas mood (0-1).
+- `targetAudience`: Array target penonton.
+- `commonThemes`: Array tema umum dalam genre.
+
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/2yHWGGq7/Screenshot-1730.png)
 
 ```javascript
 let animationId = db.genres.findOne({ genreName: "Animation" })._id;
 let sciFiId = db.genres.findOne({ genreName: "Science Fiction" })._id;
 let dramaId = db.genres.findOne({ genreName: "Drama" })._id;
 ```
-Kode tersebut memiliki fungsi untuk menyimpan ID referensi dari genre-genre film. Mari saya jelaskan secara detail:
+Kode tersebut memiliki fungsi untuk menyimpan ID referensi dari genre-genre film.
 
-```javascript
-// Store genre IDs for reference
-let animationId = db.genres.findOne({ genreName: "Animation" })._id;
-let sciFiId = db.genres.findOne({ genreName: "Science Fiction" })._id;
-let dramaId = db.genres.findOne({ genreName: "Drama" })._id;
-```
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/c1TfdxDt/Screenshot-1731.png)
 
 Fungsi utamanya:
 
 1. **Menyimpan Reference ID Genre:**
-   - Mengambil ObjectID dari setiap genre film
-   - Menyimpannya dalam variabel untuk digunakan sebagai referensi
-   - Digunakan untuk mengaitkan film dengan genre-genrenya
+   - Mengambil ObjectID dari setiap genre film.
+   - Menyimpannya dalam variabel untuk digunakan sebagai referensi.
+   - Digunakan untuk mengaitkan film dengan genre-genrenya.
 
 2. **Metode yang Digunakan:**
    ```javascript
@@ -458,8 +471,8 @@ Fungsi utamanya:
 
 4. **Manfaat:**
    - **Data Consistency**: 
-     - Memastikan konsistensi referensi genre dalam database
-     - Menghindari kesalahan penulisan nama genre
+     - Memastikan konsistensi referensi genre dalam database.
+     - Menghindari kesalahan penulisan nama genre.
    
    - **Query Efficiency**:
      ```javascript
@@ -470,9 +483,9 @@ Fungsi utamanya:
      ```
 
    - **Relational Mapping**:
-     - Memudahkan pencarian film berdasarkan genre
-     - Memungkinkan filtering dan kategorisasi film
-     - Mendukung sistem rekomendasi berbasis genre
+     - Memudahkan pencarian film berdasarkan genre.
+     - Memungkinkan filtering dan kategorisasi film.
+     - Mendukung sistem rekomendasi berbasis genre.
 
 5. **Use Cases:**
    ```javascript
@@ -491,18 +504,12 @@ Fungsi utamanya:
    })
    ```
 
-6. **Best Practices yang Diterapkan:**
-   - **Performance**: Menyimpan ID dalam variabel menghindari query berulang
-   - **Maintenance**: Memudahkan perubahan atau update genre di masa depan
-   - **Scalability**: Mendukung penambahan genre baru dengan mudah
-   - **Error Prevention**: Mengurangi risiko kesalahan dalam referensi genre
-
-7. **Kegunaan dalam Fitur Platform:**
-   - Filtering film berdasarkan genre
-   - Sistem rekomendasi berbasis genre
-   - Kategorisasi konten
-   - Analisis preferensi pengguna
-   - Personalisasi konten berdasarkan genre favorit
+6. **Kegunaan dalam Fitur Platform:**
+   - Filtering film berdasarkan genre.
+   - Sistem rekomendasi berbasis genre.
+   - Kategorisasi konten.
+   - Analisis preferensi pengguna.
+   - Personalisasi konten berdasarkan genre favorit.
 
 Kode ini merupakan komponen penting dalam sistem kategorisasi dan pengorganisasian konten film dalam platform streaming, memungkinkan manajemen konten yang lebih efisien dan pengalaman pengguna yang lebih baik.
 
@@ -605,52 +612,56 @@ db.films.insertMany([
   }
 ])
 ```
+
 Collection ini adalah collection utama yang menyimpan data film dengan struktur yang sangat detail:
 
-- `_id`: ID unik MongoDB untuk setiap film
-- `studioId`: Referensi ke studio produksi
-- `isSeries`: Boolean penanda film serial atau tidak
-- `title`: Judul film
-- `releaseYear`: Tahun rilis
-- `duration`: Durasi dalam menit
-- `description`: Sinopsis film
-- `ageRating`: Rating usia
-- `viewCount`: Jumlah penonton
-- `createdAt`: Timestamp penambahan ke database
-- `directors`: Array berisi sutradara
-  - `directorId`: Referensi ke collection directors
-  - `directorName`: Nama sutradara
-- `genres`: Array berisi genre film
-  - `genreId`: Referensi ke collection genres
-  - `genreName`: Nama genre
-- `cast`: Array berisi pemeran
-  - `actorId`: Referensi ke collection actors
-  - `characterName`: Nama karakter
-  - `role`: Tipe peran (Lead/Supporting)
-  - `screenTime`: Durasi tampil dalam menit
-- `technicalSpecs`: Object spesifikasi teknis
-  - `resolution`: Resolusi tersedia
-  - `audioFormats`: Array format audio
-  - `subtitleLanguages`: Array bahasa subtitle
-- `ratings`: Object berisi rating dari berbagai sumber
-  - `imdb`: Rating IMDB
-  - `rottenTomatoes`: Rating Rotten Tomatoes
-  - `internal`: Rating internal platform
-- `streamingQuality`: Array kualitas streaming tersedia
-- `availability`: Object informasi ketersediaan
-  - `regions`: Array wilayah tersedia
-  - `restrictions`: Array pembatasan jika ada
+- `_id`: ID unik MongoDB untuk setiap film.
+- `studioId`: Referensi ke studio produksi.
+- `isSeries`: Boolean penanda film serial atau tidak.
+- `title`: Judul film.
+- `releaseYear`: Tahun rilis.
+- `duration`: Durasi dalam menit.
+- `description`: Sinopsis film.
+- `ageRating`: Rating usia.
+- `viewCount`: Jumlah penonton.
+- `createdAt`: Timestamp penambahan ke database.
+- `directors`: Array berisi sutradara.
+  - `directorId`: Referensi ke collection directors.
+  - `directorName`: Nama sutradara.
+- `genres`: Array berisi genre film.
+  - `genreId`: Referensi ke collection genres.
+  - `genreName`: Nama genre.
+- `cast`: Array berisi pemeran.
+  - `actorId`: Referensi ke collection actors.
+  - `characterName`: Nama karakter.
+  - `role`: Tipe peran (Lead/Supporting).
+  - `screenTime`: Durasi tampil dalam menit.
+- `technicalSpecs`: Object spesifikasi teknis.
+  - `resolution`: Resolusi tersedia.
+  - `audioFormats`: Array format audio.
+  - `subtitleLanguages`: Array bahasa subtitle.
+- `ratings`: Object berisi rating dari berbagai sumber.
+  - `imdb`: Rating IMDB.
+  - `rottenTomatoes`: Rating Rotten Tomatoes.
+  - `internal`: Rating internal platform.
+- `streamingQuality`: Array kualitas streaming tersedia.
+- `availability`: Object informasi ketersediaan.
+  - `regions`: Array wilayah tersedia.
+  - `restrictions`: Array pembatasan jika ada.
+
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/C17nM74p/Screenshot-1732.png)
 
 ```javascript
 let toyStoryId = db.films.findOne({ title: "Toy Story" })._id;
 let ironManId = db.films.findOne({ title: "Iron Man" })._id;
 ```
-Kode tersebut memiliki fungsi untuk menyimpan ID referensi dari film-film spesifik. Mari saya jelaskan secara detail:
+Kode tersebut memiliki fungsi untuk menyimpan ID referensi dari film-film spesifik.
 
-```javascript
-let toyStoryId = db.films.findOne({ title: "Toy Story" })._id;
-let ironManId = db.films.findOne({ title: "Iron Man" })._id;
-```
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/j2jwDf8w/Screenshot-1733.png)
 
 Fungsi utamanya:
 
@@ -719,16 +730,16 @@ Fungsi utamanya:
 
 5. **Manfaat:**
    - **Data Consistency**:
-     - Memastikan referensi film yang konsisten
-     - Menghindari duplikasi data film
+     - Memastikan referensi film yang konsisten.
+     - Menghindari duplikasi data film.
    
    - **Query Performance**:
-     - Optimasi pencarian berbasis ID
-     - Mempercepat operasi join/lookup
+     - Optimasi pencarian berbasis ID.
+     - Mempercepat operasi join/lookup.
 
    - **Data Integrity**:
-     - Memastikan referensi yang valid
-     - Memudahkan tracking film-related data
+     - Memastikan referensi yang valid.
+     - Memudahkan tracking film-related data.
 
 6. **Implementasi dalam Fitur:**
 
@@ -756,19 +767,6 @@ Fungsi utamanya:
      }}
    ])
    ```
-
-7. **Best Practices yang Diterapkan:**
-   - **Efficiency**: Menyimpan ID untuk menghindari query berulang
-   - **Maintainability**: Memudahkan update data terkait film
-   - **Reliability**: Memastikan konsistensi referensi film
-   - **Scalability**: Mendukung penambahan data terkait film
-
-8. **Kegunaan dalam Analisis:**
-   - Tracking performa film
-   - Analisis engagement penonton
-   - Pembuatan rekomendasi
-   - Monitoring popularitas film
-   - Analisis pola menonton
 
 Kode ini merupakan komponen kunci dalam sistem manajemen konten dan analisis perilaku penonton dalam platform streaming, memungkinkan tracking yang akurat dan analisis yang mendalam tentang performa setiap film.
 
@@ -828,23 +826,28 @@ db.films.updateOne(
   }
 )
 ```
+
 Collection ini menyimpan data episode untuk film serial sebagai subdocument dalam Films collection:
 
-- `episodeId`: ID unik untuk setiap episode
-- `episodeNumber`: Nomor urut episode
-- `seasonNumber`: Nomor season
-- `title`: Judul episode
-- `duration`: Durasi dalam menit
-- `releaseDate`: Tanggal rilis episode
-- `synopsis`: Ringkasan cerita episode
-- `viewCount`: Jumlah penonton
-- `cast`: Array pemeran dalam episode
-  - `actorId`: Referensi ke collection actors
-  - `characterName`: Nama karakter
-  - `screenTime`: Durasi tampil dalam menit
-- `ratings`: Object rating episode
-  - `imdb`: Rating IMDB
-  - `internal`: Rating internal platform
+- `episodeId`: ID unik untuk setiap episode.
+- `episodeNumber`: Nomor urut episode.
+- `seasonNumber`: Nomor season.
+- `title`: Judul episode.
+- `duration`: Durasi dalam menit.
+- `releaseDate`: Tanggal rilis episode.
+- `synopsis`: Ringkasan cerita episode.
+- `viewCount`: Jumlah penonton.
+- `cast`: Array pemeran dalam episode.
+  - `actorId`: Referensi ke collection actors.
+  - `characterName`: Nama karakter.
+  - `screenTime`: Durasi tampil dalam menit.
+- `ratings`: Object rating episode.
+  - `imdb`: Rating IMDB.
+  - `internal`: Rating internal platform.
+
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/vTS1fmjP/Screenshot-1734.png)
 
 ## 8. Reviews Collection:
 ```javascript
@@ -897,24 +900,28 @@ db.reviews.insertMany([
 ```
 Collection ini menyimpan ulasan pengguna dengan analisis sentiment:
 
-- `_id`: ID unik untuk setiap review
-- `userId`: Referensi ke collection users
-- `filmId`: Referensi ke collection films
-- `rating`: Nilai rating (1-10)
-- `commentText`: Teks ulasan
-- `datePosted`: Timestamp posting
-- `likeCount`: Jumlah like
-- `isEdited`: Flag penanda edit
-- `watchedComplete`: Flag penonton selesai menonton
-- `sentiment`: Object analisis sentimen
-  - `positive`: Skor sentimen positif (0-1)
-  - `negative`: Skor sentimen negatif (0-1)
-  - `neutral`: Skor sentimen netral (0-1)
-- `tags`: Array tag terkait ulasan
-- `userPlatform`: Object informasi platform
-  - `device`: Jenis perangkat
-  - `os`: Sistem operasi
-  - `appVersion`: Versi aplikasi
+- `_id`: ID unik untuk setiap review.
+- `userId`: Referensi ke collection users.
+- `filmId`: Referensi ke collection films.
+- `rating`: Nilai rating (1-10).
+- `commentText`: Teks ulasan.
+- `datePosted`: Timestamp posting.
+- `likeCount`: Jumlah like.
+- `isEdited`: Flag penanda edit.
+- `watchedComplete`: Flag penonton selesai menonton.
+- `sentiment`: Object analisis sentimen.
+  - `positive`: Skor sentimen positif (0-1).
+  - `negative`: Skor sentimen negatif (0-1).
+  - `neutral`: Skor sentimen netral (0-1).
+- `tags`: Array tag terkait ulasan.
+- `userPlatform`: Object informasi platform.
+  - `device`: Jenis perangkat.
+  - `os`: Sistem operasi.
+  - `appVersion`: Versi aplikasi.
+
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/L4ygryXz/Screenshot-1735.png)
 
 ## 9. Watch History Collection:
 ```javascript
@@ -995,35 +1002,39 @@ db.watchHistory.insertMany([
 ```
 Collection ini mencatat riwayat menonton dengan detail teknis lengkap:
 
-- `_id`: ID unik untuk setiap riwayat
-- `userId`: Referensi ke collection users
-- `contentType`: Tipe konten (FILM/EPISODE)
-- `film`: Object referensi film
-  - `filmId`: ID film
-  - `title`: Judul film
-- `episode`: Data episode (null jika bukan serial)
-- `watchDate`: Tanggal menonton
-- `watchDuration`: Durasi menonton
-- `watchProgress`: Persentase progress (0-100)
-- `lastWatchedPosition`: Posisi terakhir menonton (menit)
-- `watchSession`: Object detail sesi menonton
-  - `startTime`: Waktu mulai
-  - `endTime`: Waktu selesai
-  - `pauseCount`: Jumlah jeda
-  - `bufferingEvents`: Jumlah buffering
-  - `quality`: Kualitas streaming
-  - `device`: Object informasi perangkat
-    - `type`: Jenis perangkat
-    - `model`: Model perangkat
-    - `osVersion`: Versi OS
-  - `network`: Object informasi jaringan
-    - `type`: Tipe jaringan
-    - `speed`: Kecepatan jaringan
-- `userInteractions`: Object interaksi pengguna
-  - `rewinds`: Jumlah mundur
-  - `forwards`: Jumlah maju cepat
-  - `pauses`: Jumlah jeda
-  - `qualityChanges`: Jumlah perubahan kualitas
+- `_id`: ID unik untuk setiap riwayat.
+- `userId`: Referensi ke collection users.
+- `contentType`: Tipe konten (FILM/EPISODE).
+- `film`: Object referensi film.
+  - `filmId`: ID film.
+  - `title`: Judul film.
+- `episode`: Data episode (null jika bukan serial).
+- `watchDate`: Tanggal menonton.
+- `watchDuration`: Durasi menonton.
+- `watchProgress`: Persentase progress (0-100).
+- `lastWatchedPosition`: Posisi terakhir menonton (menit).
+- `watchSession`: Object detail sesi menonton.
+  - `startTime`: Waktu mulai.
+  - `endTime`: Waktu selesai.
+  - `pauseCount`: Jumlah jeda.
+  - `bufferingEvents`: Jumlah buffering.
+  - `quality`: Kualitas streaming.
+  - `device`: Object informasi perangkat.
+    - `type`: Jenis perangkat.
+    - `model`: Model perangkat.
+    - `osVersion`: Versi OS.
+  - `network`: Object informasi jaringan.
+    - `type`: Tipe jaringan.
+    - `speed`: Kecepatan jaringan.
+- `userInteractions`: Object interaksi pengguna.
+  - `rewinds`: Jumlah mundur.
+  - `forwards`: Jumlah maju cepat.
+  - `pauses`: Jumlah jeda.
+  - `qualityChanges`: Jumlah perubahan kualitas.
+
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/25wSn6L4/Screenshot-1736.png)
 
 Collection ini sangat penting untuk analisis perilaku penonton dan optimasi pengalaman streaming.
 
@@ -1084,24 +1095,28 @@ db.watchlist.insertMany([
 ```
 Collection ini menyimpan daftar film yang ingin ditonton pengguna:
 
-- `_id`: ID unik untuk setiap watchlist
-- `userId`: Referensi ke collection users
-- `films`: Array film dalam watchlist
-  - `filmId`: Referensi ke collection films
-  - `dateAdded`: Tanggal penambahan
-  - `priority`: Prioritas menonton (1-n)
-  - `notes`: Catatan pengguna
-  - `addedFrom`: Sumber rekomendasi
-  - `plannedWatchDate`: Rencana tanggal menonton
-  - `reminders`: Object pengaturan pengingat
-    - `enabled`: Status pengingat aktif
-    - `frequency`: Frekuensi pengingat
-- `lastUpdated`: Timestamp update terakhir
-- `sortPreference`: Preferensi pengurutan
-- `notificationSettings`: Object pengaturan notifikasi
-  - `emailNotifications`: Status notifikasi email
-  - `pushNotifications`: Status notifikasi push
-  - `reminderDays`: Array hari pengingat sebelum tanggal rencana
+- `_id`: ID unik untuk setiap watchlist.
+- `userId`: Referensi ke collection users.
+- `films`: Array film dalam watchlist.
+  - `filmId`: Referensi ke collection films.
+  - `dateAdded`: Tanggal penambahan.
+  - `priority`: Prioritas menonton (1-n).
+  - `notes`: Catatan pengguna.
+  - `addedFrom`: Sumber rekomendasi.
+  - `plannedWatchDate`: Rencana tanggal menonton.
+  - `reminders`: Object pengaturan pengingat.
+    - `enabled`: Status pengingat aktif.
+    - `frequency`: Frekuensi pengingat.
+- `lastUpdated`: Timestamp update terakhir.
+- `sortPreference`: Preferensi pengurutan.
+- `notificationSettings`: Object pengaturan notifikasi.
+  - `emailNotifications`: Status notifikasi email.
+  - `pushNotifications`: Status notifikasi push.
+  - `reminderDays`: Array hari pengingat sebelum tanggal rencana.
+
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/rp88ykZz/Screenshot-1737.png)
 
 ## 11. Analytics Collection:
 ```javascript
@@ -1183,39 +1198,43 @@ db.analytics.insertMany([
 ```
 Collection ini menyimpan data analitik detail untuk setiap film:
 
-- `_id`: ID unik untuk setiap analitik
-- `filmId`: Referensi ke collection films
-- `period`: Periode analisis (e.g., "2024-Q1")
-- `dailyStats`: Array statistik harian
-  - `date`: Tanggal statistik
-  - `viewCount`: Jumlah penonton
-  - `uniqueViewers`: Penonton unik
-  - `averageWatchDuration`: Rata-rata durasi menonton
-  - `completionRate`: Tingkat penyelesaian
-  - `peakViewingHours`: Object jam sibuk
-    - `start`: Jam mulai peak
-    - `end`: Jam akhir peak
-  - `deviceDistribution`: Object distribusi perangkat
-  - `qualityDistribution`: Object distribusi kualitas
-- `demographicData`: Object data demografi
-  - `ageGroups`: Object distribusi usia
-  - `genderDistribution`: Object distribusi gender
-  - `topRegions`: Array region teratas
-    - `region`: Nama region
-    - `viewershipShare`: Persentase penonton
-- `engagement`: Object metrik engagement
-  - `averageRating`: Rating rata-rata
-  - `reviewCount`: Jumlah review
-  - `shareCount`: Jumlah share
-  - `addedToWatchlist`: Jumlah tambah ke watchlist
-  - `socialMediaMentions`: Object mention media sosial
-- `technicalMetrics`: Object metrik teknis
-  - `averageBufferingTime`: Rata-rata waktu buffering
-  - `streamingErrors`: Jumlah error streaming
-  - `averageBitrate`: Rata-rata bitrate
-  - `cdnPerformance`: Object performa CDN
-    - `latency`: Latensi
-    - `errorRate`: Tingkat error
+- `_id`: ID unik untuk setiap analitik.
+- `filmId`: Referensi ke collection films.
+- `period`: Periode analisis (e.g., "2024-Q1").
+- `dailyStats`: Array statistik harian.
+  - `date`: Tanggal statistik.
+  - `viewCount`: Jumlah penonton.
+  - `uniqueViewers`: Penonton unik.
+  - `averageWatchDuration`: Rata-rata durasi menonton.
+  - `completionRate`: Tingkat penyelesaian.
+  - `peakViewingHours`: Object jam sibuk.
+    - `start`: Jam mulai peak.
+    - `end`: Jam akhir peak.
+  - `deviceDistribution`: Object distribusi perangkat.
+  - `qualityDistribution`: Object distribusi kualitas.
+- `demographicData`: Object data demografi.
+  - `ageGroups`: Object distribusi usia.
+  - `genderDistribution`: Object distribusi gender.
+  - `topRegions`: Array region teratas.
+    - `region`: Nama region.
+    - `viewershipShare`: Persentase penonton.
+- `engagement`: Object metrik engagement.
+  - `averageRating`: Rating rata-rata.
+  - `reviewCount`: Jumlah review.
+  - `shareCount`: Jumlah share.
+  - `addedToWatchlist`: Jumlah tambah ke watchlist.
+  - `socialMediaMentions`: Object mention media sosial.
+- `technicalMetrics`: Object metrik teknis.
+  - `averageBufferingTime`: Rata-rata waktu buffering.
+  - `streamingErrors`: Jumlah error streaming.
+  - `averageBitrate`: Rata-rata bitrate.
+  - `cdnPerformance`: Object performa CDN.
+    - `latency`: Latensi.
+    - `errorRate`: Tingkat error.
+
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/g0NGnT1s/Screenshot-1739.png)
 
 ## 12. Indexes untuk Optimasi:
 ```javascript
@@ -1229,16 +1248,19 @@ db.users.createIndex({
     "email": "text" 
 })
 ```
+**Bukti Screenshot Contoh Program:**
+
+![image info](https://i.postimg.cc/mDnRSFLF/Screenshot-1740.png)
 
 Penjelasan index:
-- Index pada username dan email dengan {unique: true} memastikan tidak ada duplikasi
-- Index pada subscription.status mempercepat query status langganan
-- Index pada subscription.endDate mempercepat query tanggal kadaluarsa
-- Text index pada fullName dan email memungkinkan pencarian teks full-text
+- Index pada username dan email dengan {unique: true} memastikan tidak ada duplikasi.
+- Index pada subscription.status mempercepat query status langganan.
+- Index pada subscription.endDate mempercepat query tanggal kadaluarsa.
+- Text index pada fullName dan email memungkinkan pencarian teks full-text.
 
 Keseluruhan struktur database ini dirancang untuk:
-1. Mendukung streaming platform dengan fitur lengkap
-2. Memungkinkan analisis mendalam tentang perilaku penonton
-3. Optimasi performa dengan penggunaan index yang tepat
-4. Fleksibilitas untuk pengembangan fitur baru
-5. Tracking detail untuk peningkatan layanan
+1. Mendukung streaming platform dengan fitur lengkap.
+2. Memungkinkan analisis mendalam tentang perilaku penonton.
+3. Optimasi performa dengan penggunaan index yang tepat.
+4. Fleksibilitas untuk pengembangan fitur baru.
+5. Tracking detail untuk peningkatan layanan.
