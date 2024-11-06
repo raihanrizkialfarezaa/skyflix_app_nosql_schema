@@ -1,0 +1,802 @@
+// Use skyflix database
+use skyflix_app
+
+// 1. Create User Collection (Incorporating user_preference, payment_info, subscription)
+db.createCollection("users")
+db.users.insertMany([
+  {
+    _id: 1,
+    username: "john_doe",
+    email: "john@example.com",
+    password: "hashed_password", // In production, ensure proper hashing
+    fullName: "John Doe",
+    dateOfBirth: new Date("1990-05-15"),
+    country: "USA",
+    createdAt: new Date("2024-10-15T12:47:31Z"),
+    preferences: [
+      {
+        genreId: 1,
+        actorId: 1,
+        preferenceScore: 0.9
+      }
+    ],
+    paymentInfo: {
+      cardType: "VISA",
+      cardNumber: "4111111111111111",
+      expirationDate: new Date("2025-12-31")
+    },
+    subscription: {
+      status: "active",
+      startDate: new Date("2023-01-01"),
+      endDate: new Date("2024-01-01")
+    }
+  },
+  {
+    _id: 2,
+    username: "jane_smith",
+    email: "jane@example.com",
+    password: "hashed_password",
+    fullName: "Jane Smith",
+    dateOfBirth: new Date("1988-09-22"),
+    country: "UK",
+    createdAt: new Date("2024-10-15T12:47:31Z"),
+    preferences: [
+      {
+        genreId: 2,
+        actorId: 2,
+        preferenceScore: 0.8
+      }
+    ],
+    paymentInfo: {
+      cardType: "MasterCard",
+      cardNumber: "5555555555554444",
+      expirationDate: new Date("2024-10-31")
+    },
+    subscription: {
+      status: "active",
+      startDate: new Date("2023-02-15"),
+      endDate: new Date("2024-02-15")
+    }
+  }
+])
+
+// 2. Create Actors Collection (Including awards)
+db.createCollection("actors")
+db.actors.insertMany([
+  {
+    _id: 1,
+    firstName: "Tom",
+    lastName: "Hanks",
+    dateOfBirth: new Date("1956-07-09"),
+    nationality: "American",
+    biography: "Award-winning actor known for various roles",
+    email: null,
+    awards: [
+      {
+        awardName: "Academy Award for Best Actor",
+        awardYear: 1994
+      }
+    ]
+  },
+  {
+    _id: 2,
+    firstName: "Scarlett",
+    lastName: "Johansson",
+    dateOfBirth: new Date("1984-11-22"),
+    nationality: "American",
+    biography: "Versatile actress and singer",
+    email: null,
+    awards: [
+      {
+        awardName: "BAFTA Award for Best Actress",
+        awardYear: 2020
+      }
+    ]
+  }
+])
+
+// 3. Create Studios Collection
+db.createCollection("studios")
+db.studios.insertMany([
+  {
+    _id: 1,
+    studioName: "Pixar",
+    country: "USA",
+    foundationYear: 1979
+  },
+  {
+    _id: 2,
+    studioName: "Studio Ghibli",
+    country: "Japan",
+    foundationYear: 1985
+  }
+])
+
+// 4. Create Directors Collection
+db.createCollection("directors")
+db.directors.insertMany([
+  {
+    _id: 1,
+    directorName: "John Lasseter"
+  },
+  {
+    _id: 2,
+    directorName: "Hayao Miyazaki"
+  }
+])
+
+// 5. Create Genres Collection (Including mood relationships)
+db.createCollection("genres")
+db.genres.insertMany([
+  {
+    _id: 1,
+    genreName: "Animation",
+    description: "Animated films and series",
+    popularityRank: 1,
+    ageGroup: "All",
+    moods: [
+      {
+        moodId: 1,
+        moodName: "Happy"
+      },
+      {
+        moodId: 3,
+        moodName: "Excited"
+      }
+    ]
+  },
+  {
+    _id: 2,
+    genreName: "Science Fiction",
+    description: "Films set in imaginary future",
+    popularityRank: 2,
+    ageGroup: "Teens",
+    moods: [
+      {
+        moodId: 3,
+        moodName: "Excited"
+      },
+      {
+        moodId: 5,
+        moodName: "Thoughtful"
+      }
+    ]
+  }
+])
+
+// 6. Create Films Collection (Including episodes for series)
+db.createCollection("films")
+db.films.insertMany([
+  {
+    _id: 1,
+    studioId: 1,
+    isSeries: false,
+    title: "Toy Story",
+    releaseYear: 1995,
+    duration: 81,
+    description: "A story of toys that come to life",
+    ageRating: "G",
+    viewCount: 1000000,
+    createdAt: new Date("2024-10-15T12:52:56Z"),
+    directors: [
+      {
+        directorId: 1,
+        directorName: "John Lasseter"
+      }
+    ],
+    genres: [
+      {
+        genreId: 1,
+        genreName: "Animation"
+      },
+      {
+        genreId: 4,
+        genreName: "Comedy"
+      }
+    ],
+    actors: [
+      {
+        actorId: 1,
+        firstName: "Tom",
+        lastName: "Hanks",
+        role: "Woody"
+      }
+    ]
+  },
+  {
+    _id: 4,
+    studioId: 4,
+    isSeries: true,
+    title: "Sherlock",
+    releaseYear: 2010,
+    duration: 90,
+    description: "Modern adaptation of Sherlock Holmes",
+    ageRating: "PG-13",
+    viewCount: 2000000,
+    createdAt: new Date("2024-10-15T12:52:56Z"),
+    episodes: [
+      {
+        episodeId: 1,
+        episodeNumber: 1,
+        title: "A Study in Pink",
+        duration: 88,
+        releaseDate: new Date("2010-07-25")
+      },
+      {
+        episodeId: 2,
+        episodeNumber: 2,
+        title: "The Blind Banker",
+        duration: 89,
+        releaseDate: new Date("2010-08-01")
+      }
+    ],
+    directors: [
+      {
+        directorId: 4,
+        directorName: "Mark Gatiss"
+      }
+    ],
+    genres: [
+      {
+        genreId: 3,
+        genreName: "Drama"
+      },
+      {
+        genreId: 4,
+        genreName: "Comedy"
+      }
+    ],
+    actors: [
+      {
+        actorId: 3,
+        firstName: "Benedict",
+        lastName: "Cumberbatch",
+        role: "Sherlock Holmes"
+      }
+    ]
+  }
+])
+
+// 7. Create Reviews Collection
+db.createCollection("reviews")
+db.reviews.insertMany([
+  {
+    _id: 1,
+    userId: 1,
+    filmId: 1,
+    rating: 9,
+    commentText: "A classic animation that never gets old",
+    datePosted: new Date("2024-10-15T13:04:21Z"),
+    likeCount: 0
+  },
+  {
+    _id: 2,
+    userId: 2,
+    filmId: 2,
+    rating: 10,
+    commentText: "A masterpiece of animation",
+    datePosted: new Date("2024-10-15T13:04:21Z"),
+    likeCount: 0
+  }
+])
+
+// 8. Create Watchlist Collection
+db.createCollection("watchlists")
+db.watchlists.insertMany([
+  {
+    _id: 1,
+    userId: 1,
+    films: [
+      {
+        filmId: 2,
+        dateAdded: new Date("2023-06-01"),
+        priority: 1,
+        notes: null
+      }
+    ]
+  },
+  {
+    _id: 2,
+    userId: 2,
+    films: [
+      {
+        filmId: 3,
+        dateAdded: new Date("2023-06-02"),
+        priority: 2,
+        notes: null
+      }
+    ]
+  }
+])
+
+// 9. Create Watch History Collection
+db.createCollection("watchHistory")
+db.watchHistory.insertMany([
+  {
+    _id: 1,
+    userId: 1,
+    contentType: "FILM",
+    film: {
+      filmId: 1,
+      title: "Toy Story"
+    },
+    episode: null,
+    watchDate: new Date("2023-05-15"),
+    watchDuration: 81,
+    watchProgress: 100, // Menambahkan field untuk tracking progress
+    lastWatchedPosition: 81 // Dalam menit
+  },
+  {
+    _id: 2,
+    userId: 4,
+    contentType: "EPISODE",
+    film: {
+      filmId: 4,
+      title: "Sherlock"
+    },
+    episode: {
+      episodeId: 1,
+      title: "A Study in Pink",
+      episodeNumber: 1
+    },
+    watchDate: new Date("2023-05-18"),
+    watchDuration: 88,
+    watchProgress: 75,
+    lastWatchedPosition: 66 // Dalam menit
+  }
+])
+
+// 10. Create Royalty Payments Collection
+db.createCollection("royaltyPayments")
+db.royaltyPayments.insertMany([
+  {
+    _id: 1,
+    studioId: 1,
+    filmId: 1,
+    contentType: "FILM",
+    viewCount: 1000000,
+    royaltyAmount: 50000.00,
+    paymentDate: new Date("2024-01-01"),
+    paymentStatus: "PAID",
+    paymentDetails: {
+      method: "BANK_TRANSFER",
+      transactionId: "ROY-2024-001"
+    }
+  },
+  {
+    _id: 2,
+    studioId: 4,
+    filmId: 4,
+    episodeId: 1,
+    contentType: "EPISODE",
+    viewCount: 2000000,
+    royaltyAmount: 100000.00,
+    paymentDate: new Date("2024-01-01"),
+    paymentStatus: "PAID",
+    paymentDetails: {
+      method: "BANK_TRANSFER",
+      transactionId: "ROY-2024-002"
+    }
+  }
+])
+
+// 11. Create Analytics Collection (New collection for tracking statistics)
+db.createCollection("analytics")
+db.analytics.insertMany([
+  {
+    _id: 1,
+    filmId: 1,
+    dailyStats: [
+      {
+        date: new Date("2024-01-01"),
+        viewCount: 1000,
+        uniqueViewers: 950,
+        averageWatchDuration: 75,
+        completionRate: 0.92
+      },
+      {
+        date: new Date("2024-01-02"),
+        viewCount: 1200,
+        uniqueViewers: 1100,
+        averageWatchDuration: 78,
+        completionRate: 0.94
+      }
+    ],
+    totalViews: 1000000,
+    averageRating: 4.5,
+    demographicData: {
+      ageGroups: {
+        "13-17": 0.15,
+        "18-24": 0.25,
+        "25-34": 0.35,
+        "35-44": 0.15,
+        "45+": 0.10
+      },
+      genderDistribution: {
+        male: 0.48,
+        female: 0.51,
+        other: 0.01
+      }
+    }
+  }
+])
+
+// Create Indexes for Better Performance
+
+// Users Collection Indexes
+db.users.createIndex({ "username": 1 }, { unique: true })
+db.users.createIndex({ "email": 1 }, { unique: true })
+db.users.createIndex({ "subscription.status": 1 })
+
+// Actors Collection Indexes
+db.actors.createIndex({ "lastName": 1, "firstName": 1 })
+db.actors.createIndex({ "nationality": 1 })
+
+// Films Collection Indexes
+db.films.createIndex({ "title": 1 })
+db.films.createIndex({ "releaseYear": -1 })
+db.films.createIndex({ "viewCount": -1 })
+db.films.createIndex({ "studioId": 1 })
+db.films.createIndex({ "genres.genreId": 1 })
+db.films.createIndex({ 
+  "title": "text", 
+  "description": "text" 
+}, {
+  weights: {
+    title: 10,
+    description: 5
+  }
+})
+
+// Reviews Collection Indexes
+db.reviews.createIndex({ "userId": 1, "filmId": 1 }, { unique: true })
+db.reviews.createIndex({ "datePosted": -1 })
+db.reviews.createIndex({ "rating": -1 })
+
+// Watch History Collection Indexes
+db.watchHistory.createIndex({ "userId": 1, "watchDate": -1 })
+db.watchHistory.createIndex({ "film.filmId": 1 })
+
+// Watchlists Collection Indexes
+db.watchlists.createIndex({ "userId": 1 })
+db.watchlists.createIndex({ "films.filmId": 1 })
+
+// Royalty Payments Collection Indexes
+db.royaltyPayments.createIndex({ "studioId": 1, "paymentDate": -1 })
+db.royaltyPayments.createIndex({ "filmId": 1 })
+
+// Analytics Collection Indexes
+db.analytics.createIndex({ "filmId": 1 })
+db.analytics.createIndex({ "dailyStats.date": -1 })
+
+// Example of Compound Indexes for Common Queries
+db.films.createIndex({ "releaseYear": -1, "viewCount": -1 })
+db.watchHistory.createIndex({ "userId": 1, "contentType": 1, "watchDate": -1 })
+
+// Create some useful views
+
+// Popular Films View
+db.createView(
+  "popularFilms",
+  "films",
+  [
+    {
+      $sort: { viewCount: -1 }
+    },
+    {
+      $project: {
+        title: 1,
+        viewCount: 1,
+        releaseYear: 1,
+        ageRating: 1,
+        averageRating: {
+          $avg: "$reviews.rating"
+        }
+      }
+    }
+  ]
+)
+
+// User Activity View
+db.createView(
+  "userActivity",
+  "watchHistory",
+  [
+    {
+      $group: {
+        _id: "$userId",
+        totalWatchTime: { $sum: "$watchDuration" },
+        filmsWatched: { $addToSet: "$film.filmId" },
+        lastActive: { $max: "$watchDate" }
+      }
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "_id",
+        foreignField: "_id",
+        as: "userInfo"
+      }
+    }
+  ]
+)
+
+// 1. Basic CRUD Operations
+
+// Create - Menambah Film Baru
+db.films.insertOne({
+  _id: 6,
+  studioId: 1,
+  isSeries: false,
+  title: "Finding Nemo",
+  releaseYear: 2003,
+  duration: 100,
+  description: "A father fish searches for his lost son",
+  ageRating: "G",
+  viewCount: 0,
+  createdAt: new Date(),
+  directors: [
+    {
+      directorId: 1,
+      directorName: "Andrew Stanton"
+    }
+  ],
+  genres: [
+    {
+      genreId: 1,
+      genreName: "Animation"
+    }
+  ]
+})
+
+// Read - Query Complex
+// 1. Mencari Film berdasarkan Genre dan Rating
+db.films.find({
+  "genres.genreName": "Animation",
+  ageRating: "G",
+  viewCount: { $gt: 500000 }
+}).sort({ releaseYear: -1 })
+
+// 2. Mencari Film dengan Text Search
+db.films.find({
+  $text: {
+    $search: "toys animation"
+  }
+}, {
+  score: { $meta: "textScore" }
+}).sort({
+  score: { $meta: "textScore" }
+})
+
+// 3. Agregasi untuk mendapatkan statistik film per studio
+db.films.aggregate([
+  {
+    $group: {
+      _id: "$studioId",
+      totalFilms: { $sum: 1 },
+      avgViewCount: { $avg: "$viewCount" },
+      totalViewCount: { $sum: "$viewCount" }
+    }
+  },
+  {
+    $lookup: {
+      from: "studios",
+      localField: "_id",
+      foreignField: "_id",
+      as: "studioInfo"
+    }
+  },
+  {
+    $project: {
+      studioName: { $arrayElemAt: ["$studioInfo.studioName", 0] },
+      totalFilms: 1,
+      avgViewCount: { $round: ["$avgViewCount", 2] },
+      totalViewCount: 1
+    }
+  }
+])
+
+// 4. Mencari User dengan Subscription yang akan berakhir
+db.users.find({
+  "subscription.status": "active",
+  "subscription.endDate": {
+    $lt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+  }
+}, {
+  username: 1,
+  email: 1,
+  "subscription.endDate": 1
+})
+
+// 5. Analytics untuk Film Tertentu
+db.analytics.aggregate([
+  {
+    $match: { filmId: 1 }
+  },
+  {
+    $unwind: "$dailyStats"
+  },
+  {
+    $group: {
+      _id: null,
+      totalViews: { $first: "$totalViews" },
+      avgDailyViews: { $avg: "$dailyStats.viewCount" },
+      maxDailyViews: { $max: "$dailyStats.viewCount" },
+      avgCompletionRate: { $avg: "$dailyStats.completionRate" }
+    }
+  }
+])
+
+// 6. User Watch History dengan Film Details
+db.watchHistory.aggregate([
+  {
+    $match: { userId: 1 }
+  },
+  {
+    $lookup: {
+      from: "films",
+      localField: "film.filmId",
+      foreignField: "_id",
+      as: "filmDetails"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      watchDate: 1,
+      watchDuration: 1,
+      filmTitle: { $arrayElemAt: ["$filmDetails.title", 0] },
+      contentType: 1,
+      progress: {
+        $multiply: [
+          { $divide: ["$watchProgress", 100] },
+          100
+        ]
+      }
+    }
+  },
+  {
+    $sort: { watchDate: -1 }
+  }
+])
+
+// 7. Update Operations
+
+// Update Film View Count
+db.films.updateOne(
+  { _id: 1 },
+  {
+    $inc: { viewCount: 1 },
+    $set: { lastWatched: new Date() }
+  }
+)
+
+// Update User Subscription
+db.users.updateOne(
+  { _id: 1 },
+  {
+    $set: {
+      "subscription.status": "active",
+      "subscription.endDate": new Date("2025-01-01")
+    }
+  }
+)
+
+// 8. Delete Operations
+
+// Remove Expired Watchlist Items
+db.watchlists.updateMany(
+  {},
+  {
+    $pull: {
+      films: {
+        dateAdded: {
+          $lt: new Date(Date.now() - 180 * 24 * 60 * 60 * 1000) // 180 days old
+        }
+      }
+    }
+  }
+)
+
+// Delete Inactive Users
+db.users.deleteMany({
+  "subscription.status": "expired",
+  "subscription.endDate": {
+    $lt: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000) // 1 year ago
+  }
+})
+
+// 9. Advanced Queries
+
+// Get Popular Genres by Watch Time
+db.watchHistory.aggregate([
+  {
+    $lookup: {
+      from: "films",
+      localField: "film.filmId",
+      foreignField: "_id",
+      as: "filmInfo"
+    }
+  },
+  {
+    $unwind: "$filmInfo"
+  },
+  {
+    $unwind: "$filmInfo.genres"
+  },
+  {
+    $group: {
+      _id: "$filmInfo.genres.genreId",
+      genreName: { $first: "$filmInfo.genres.genreName" },
+      totalWatchTime: { $sum: "$watchDuration" },
+      uniqueViewers: { $addToSet: "$userId" }
+    }
+  },
+  {
+    $project: {
+      genreName: 1,
+      totalWatchTime: 1,
+      uniqueViewers: { $size: "$uniqueViewers" }
+    }
+  },
+  {
+    $sort: { totalWatchTime: -1 }
+  }
+])
+
+// User Recommendations based on Watch History
+db.watchHistory.aggregate([
+  {
+    $match: { userId: 1 }
+  },
+  {
+    $lookup: {
+      from: "films",
+      localField: "film.filmId",
+      foreignField: "_id",
+      as: "watchedFilms"
+    }
+  },
+  {
+    $unwind: "$watchedFilms"
+  },
+  {
+    $unwind: "$watchedFilms.genres"
+  },
+  {
+    $group: {
+      _id: "$watchedFilms.genres.genreId",
+      genreName: { $first: "$watchedFilms.genres.genreName" },
+      watchCount: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { watchCount: -1 }
+  },
+  {
+    $limit: 3
+  },
+  {
+    $lookup: {
+      from: "films",
+      let: { genreId: "$_id" },
+      pipeline: [
+        {
+          $match: {
+            $expr: {
+              $in: ["$$genreId", "$genres.genreId"]
+            },
+            viewCount: { $gt: 100000 }
+          }
+        },
+        {
+          $sort: { viewCount: -1 }
+        },
+        {
+          $limit: 5
+        }
+      ],
+      as: "recommendedFilms"
+    }
+  }
+])
